@@ -1,7 +1,4 @@
-from sklearn.model_selection import (
-    RandomizedSearchCV
-)
-
+from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -15,11 +12,7 @@ from sklearn.metrics import (
 
 class ModelTrainer:
 
-    def __init__(
-        self,
-        models,
-        problem_type
-    ):
+    def __init__(self,models,problem_type):
 
         self.models = models
 
@@ -33,13 +26,7 @@ class ModelTrainer:
 
         self.best_score = float("-inf")
 
-    def train(
-        self,
-        x_train,
-        x_test,
-        y_train,
-        y_test
-    ):
+    def train(self,x_train,x_test,y_train,y_test):
 
         for model_name, model_info in self.models.items():
 
@@ -48,8 +35,7 @@ class ModelTrainer:
             params = model_info["params"]
 
             print(
-                f"\nTraining: {model_name}"
-            )
+                f"\nTraining: {model_name}")
 
             if params:
 
@@ -84,64 +70,39 @@ class ModelTrainer:
 
                 )
 
-                search.fit(
-                    x_train,
-                    y_train
-                )
+                search.fit(x_train,y_train)
 
-                trained_model = (
-                    search.best_estimator_
-                )
+                trained_model = (search.best_estimator_)
 
-                best_params = (
-                    search.best_params_
-                )
+                best_params = (search.best_params_)
 
             else:
 
-                model.fit(
-                    x_train,
-                    y_train
-                )
+                model.fit(x_train,y_train)
 
                 trained_model = model
 
                 best_params = {}
 
-            predictions = (
-                trained_model.predict(
-                    x_test
-                )
-            )
+            predictions = (trained_model.predict(x_test))
 
-            if (
-                self.problem_type
-                == "classification"
-            ):
+            if (self.problem_type== "classification"):
 
-                score = accuracy_score(
-                    y_test,
-                    predictions
-                )
+                score = accuracy_score(y_test,predictions)
 
                 result = {
 
-                    "model_name":
-                    model_name,
+                    "model_name": model_name,
 
-                    "accuracy":
-                    round(score, 4),
+                    "accuracy":round(score, 4),
 
-                    "precision":
-                    round(
+                    "precision": round(
                         precision_score(
                             y_test,
                             predictions,
                             average="weighted",
                             zero_division=0
-                        ),
-                        4
-                    ),
+                        ),4),
 
                     "recall":
                     round(
@@ -149,10 +110,7 @@ class ModelTrainer:
                             y_test,
                             predictions,
                             average="weighted",
-                            zero_division=0
-                        ),
-                        4
-                    ),
+                            zero_division=0),4),
 
                     "f1_score":
                     round(
@@ -160,21 +118,13 @@ class ModelTrainer:
                             y_test,
                             predictions,
                             average="weighted",
-                            zero_division=0
-                        ),
-                        4
-                    ),
+                            zero_division=0),4),
 
-                    "best_params":
-                    best_params
-                }
+                    "best_params":best_params}
 
             else:
 
-                score = r2_score(
-                    y_test,
-                    predictions
-                )
+                score = r2_score(y_test,predictions)
 
                 result = {
 
@@ -186,49 +136,25 @@ class ModelTrainer:
 
                     "mae":
                     round(
-                        mean_absolute_error(
-                            y_test,
-                            predictions
-                        ),
-                        4
-                    ),
+                        mean_absolute_error(y_test,predictions),4),
 
                     "rmse":
                     round(
                         mean_squared_error(
                             y_test,
                             predictions,
-                            squared=False
-                        ),
-                        4
-                    ),
+                            squared=False),4),
 
-                    "best_params":
-                    best_params
-                }
+                    "best_params":best_params}
 
-            self.results.append(
-                result
-            )
+            self.results.append(result)
 
             if score > self.best_score:
 
                 self.best_score = score
 
-                self.best_model = (
-                    trained_model
-                )
+                self.best_model = (trained_model)
 
-                self.best_model_name = (
-                    model_name
-                )
+                self.best_model_name = (model_name)
 
-        return (
-
-            self.best_model,
-
-            self.best_model_name,
-
-            self.results
-
-        )
+        return (self.best_model,self.best_model_name,self.results)
