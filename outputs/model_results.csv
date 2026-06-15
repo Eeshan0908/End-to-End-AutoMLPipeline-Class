@@ -1,0 +1,7 @@
+model_name,accuracy,precision,recall,f1_score,best_params
+LogisticRegression,0.65,0.4225,0.65,0.5121,"{'solver': 'lbfgs', 'C': 0.001}"
+SVC,0.65,0.695,0.65,0.6581,"{'kernel': 'poly', 'gamma': 'scale', 'C': 10}"
+KNNClassifier,0.6,0.6283,0.6,0.6083,"{'weights': 'uniform', 'n_neighbors': 3, 'metric': 'euclidean'}"
+GaussianNB,0.6,0.6283,0.6,0.6083,{'var_smoothing': 1e-12}
+RandomForestClassifier,0.5,0.5989,0.5,0.5,"{'n_estimators': 200, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_depth': 10, 'criterion': 'entropy'}"
+DecisionTreeClassifier,0.4,0.4791,0.4,0.4,"{'min_samples_split': 2, 'min_samples_leaf': 4, 'max_depth': 10, 'criterion': 'entropy'}"
