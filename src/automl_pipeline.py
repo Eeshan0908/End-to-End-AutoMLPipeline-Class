@@ -35,161 +35,84 @@ class AutoMLPipeline:
 
     def run(self):
 
-        print(
-            "\nStarting AutoML Pipeline..."
-        )
+        print("\nStarting AutoML Pipeline...")
 
-        # -------------------------
         # DETECT PROBLEM TYPE
-        # -------------------------
 
-        problem_type = (
-            self.detect_problem_type()
-        )
+        problem_type = (self.detect_problem_type())
 
-        print(
-            f"\nProblem Type: {problem_type}"
-        )
+        print(f"\nProblem Type: {problem_type}")
 
-        # -------------------------
         # PREPROCESSING
-        # -------------------------
-
-        preprocessor = DataPreprocessor(
-            self.df,
-            self.target_column
-        )
+        
+        preprocessor = DataPreprocessor(self.df,self.target_column)
 
         df = preprocessor.preprocess()
 
-        print(
-            "\nColumns after preprocessing:"
-        )
+        print("\nColumns after preprocessing:")
 
-        print(
-            df.columns.tolist()
-        )
+        print(df.columns.tolist())
 
-        # -------------------------
         # FEATURE SELECTION
-        # -------------------------
 
-        selector = FeatureSelector(
-            df=df,
-            target_column=self.target_column
-        )
+        selector = FeatureSelector(df=df,target_column=self.target_column)
 
-        selected_features = (
-            selector.select_features()
-        )
+        selected_features = (selector.select_features())
 
         if len(selected_features) == 0:
 
             raise ValueError(
                 "No features selected. "
-                "Try lowering the correlation threshold."
-            )
+                "Try lowering the correlation threshold.")
 
-        print(
-            "\nSelected Features:"
-        )
+        print("\nSelected Features:")
 
-        print(
-            selected_features
-        )
+        print(selected_features)
 
-        # -------------------------
         # SCALING
-        # -------------------------
 
-        df = preprocessor.scale_features(
-            selected_features
-        )
+        df = preprocessor.scale_features(selected_features)
 
         x = df[selected_features]
 
         y = df[self.target_column]
 
-        # -------------------------
         # TRAIN TEST SPLIT
-        # -------------------------
 
-        x_train, x_test, y_train, y_test = (
-            train_test_split(
-                x,
-                y,
-                test_size=0.20,
-                random_state=42
-            )
-        )
+        x_train, x_test, y_train, y_test = (train_test_split(x,y,test_size=0.20,random_state=42))
 
-        # -------------------------
         # LOAD MODELS
-        # -------------------------
 
         if problem_type == "classification":
 
-            models = (
-                ModelFactory
-                .get_classification_models()
-            )
+            models = (ModelFactory.get_classification_models())
 
         else:
 
-            models = (
-                ModelFactory
-                .get_regression_models()
-            )
+            models = (ModelFactory.get_regression_models())
 
-        # -------------------------
+
         # TRAIN MODELS
-        # -------------------------
 
-        trainer = ModelTrainer(
-            models=models,
-            problem_type=problem_type
-        )
+        trainer = ModelTrainer(models=models,problem_type=problem_type)
 
-        (
-            best_model,
-            best_model_name,
-            results
-        ) = trainer.train(
-            x_train,
-            x_test,
-            y_train,
-            y_test
-        )
+        (best_model,best_model_name,results) = trainer.train(x_train,x_test,y_train,y_test)
 
-        # -------------------------
         # RETRAIN BEST MODEL
-        # -------------------------
 
         print(
             f"\nBest Model: "
-            f"{best_model_name}"
-        )
+            f"{best_model_name}")
 
-        best_model.fit(
-            x,
-            y
-        )
+        best_model.fit(x,y)
 
-        # -------------------------
         # EXPORT
-        # -------------------------
 
-        Exporter.save_model(
-            best_model
-        )
+        Exporter.save_model(best_model)
 
-        Exporter.save_results(
-            results
-        )
+        Exporter.save_results(results)
 
-        print(
-            "\nPipeline Completed Successfully."
-        )
+        print("\nPipeline Completed Successfully.")
 
         return {
 
