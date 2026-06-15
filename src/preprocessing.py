@@ -17,13 +17,9 @@ class DataPreprocessor:
 
     def separate_columns(self):
 
-        numerical_cols = self.df.select_dtypes(
-            include=["int64", "float64"]
-        ).columns.tolist()
+        numerical_cols = self.df.select_dtypes(include=["int64", "float64"]).columns.tolist()
 
-        categorical_cols = self.df.select_dtypes(
-            include=["object", "category"]
-        ).columns.tolist()
+        categorical_cols = self.df.select_dtypes(include=["object", "category"]).columns.tolist()
 
         if self.target_column in numerical_cols:
             numerical_cols.remove(self.target_column)
@@ -39,23 +35,15 @@ class DataPreprocessor:
 
         if numerical_cols:
 
-            numerical_imputer = SimpleImputer(
-                strategy="median"
-            )
+            numerical_imputer = SimpleImputer(strategy="median")
 
-            self.df[numerical_cols] = numerical_imputer.fit_transform(
-                self.df[numerical_cols]
-            )
+            self.df[numerical_cols] = numerical_imputer.fit_transform(self.df[numerical_cols])
 
         if categorical_cols:
 
-            categorical_imputer = SimpleImputer(
-                strategy="most_frequent"
-            )
+            categorical_imputer = SimpleImputer(strategy="most_frequent")
 
-            self.df[categorical_cols] = categorical_imputer.fit_transform(
-                self.df[categorical_cols]
-            )
+            self.df[categorical_cols] = categorical_imputer.fit_transform(self.df[categorical_cols])
 
         return self.df
 
@@ -67,9 +55,7 @@ class DataPreprocessor:
 
             encoder = LabelEncoder()
 
-            self.df[column] = encoder.fit_transform(
-                self.df[column].astype(str)
-            )
+            self.df[column] = encoder.fit_transform(self.df[column].astype(str))
 
             self.encoders[column] = encoder
 
@@ -81,9 +67,7 @@ class DataPreprocessor:
 
             encoder = LabelEncoder()
 
-            self.df[self.target_column] = encoder.fit_transform(
-                self.df[self.target_column].astype(str)
-            )
+            self.df[self.target_column] = encoder.fit_transform(self.df[self.target_column].astype(str))
 
             self.encoders[self.target_column] = encoder
 
@@ -91,9 +75,7 @@ class DataPreprocessor:
 
     def scale_features(self, selected_features):
 
-        self.df[selected_features] = self.scaler.fit_transform(
-            self.df[selected_features]
-        )
+        self.df[selected_features] = self.scaler.fit_transform(self.df[selected_features])
 
         return self.df
 
