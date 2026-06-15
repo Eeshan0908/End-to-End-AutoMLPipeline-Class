@@ -39,49 +39,31 @@ class ModelFactory:
 
             "DecisionTreeRegressor": {
 
-                "model": DecisionTreeRegressor(
-                    random_state=42
-                ),
+                "model": DecisionTreeRegressor(random_state=42),
 
                 "params": {
 
-                    "max_depth": [
-                        3, 5, 10, 15, 20, None
-                    ],
+                    "max_depth": [3, 5, 10, 15, 20, None],
 
-                    "min_samples_split": [
-                        2, 5, 10, 20
-                    ],
+                    "min_samples_split": [2, 5, 10, 20],
 
-                    "min_samples_leaf": [
-                        1, 2, 4, 8
-                    ]
+                    "min_samples_leaf": [1, 2, 4, 8]
                 }
             },
 
             "RandomForestRegressor": {
 
-                "model": RandomForestRegressor(
-                    random_state=42
-                ),
+                "model": RandomForestRegressor(random_state=42),
 
                 "params": {
 
-                    "n_estimators": [
-                        100, 200, 300, 500
-                    ],
+                    "n_estimators": [100, 200, 300, 500],
 
-                    "max_depth": [
-                        5, 10, 20, None
-                    ],
+                    "max_depth": [5, 10, 20, None],
 
-                    "min_samples_split": [
-                        2, 5, 10
-                    ],
+                    "min_samples_split": [2, 5, 10],
 
-                    "min_samples_leaf": [
-                        1, 2, 4
-                    ]
+                    "min_samples_leaf": [1, 2, 4]
                 }
             },
 
@@ -91,20 +73,11 @@ class ModelFactory:
 
                 "params": {
 
-                    "n_neighbors": [
-                        3, 5, 7, 9, 11, 15
-                    ],
+                    "n_neighbors": [3, 5, 7, 9, 11, 15],
 
-                    "weights": [
-                        "uniform",
-                        "distance"
-                    ],
+                    "weights": ["uniform","distance"],
 
-                    "metric": [
-                        "euclidean",
-                        "manhattan",
-                        "minkowski"
-                    ]
+                    "metric": ["euclidean","manhattan","minkowski"]
                 }
             }
         }
@@ -118,9 +91,7 @@ class ModelFactory:
 
             "LogisticRegression": {
 
-                "model": LogisticRegression(
-                    max_iter=5000
-                ),
+                "model": LogisticRegression(max_iter=5000),
 
                 "params": {
 
@@ -133,89 +104,41 @@ class ModelFactory:
                         100
                     ],
 
-                    "solver": [
-                        "liblinear",
-                        "lbfgs"
-                    ]
+                    "solver": ["liblinear","lbfgs"]
                 }
             },
 
             "DecisionTreeClassifier": {
 
-                "model": DecisionTreeClassifier(
-                    random_state=42
-                ),
+                "model": DecisionTreeClassifier(random_state=42),
 
                 "params": {
 
-                    "max_depth": [
-                        3,
-                        5,
-                        10,
-                        15,
-                        20,
-                        None
-                    ],
+                    "max_depth": [3,5,10,15,20,None],
 
-                    "min_samples_split": [
-                        2,
-                        5,
-                        10,
-                        20
-                    ],
+                    "min_samples_split": [2,5,10,20],
 
-                    "min_samples_leaf": [
-                        1,
-                        2,
-                        4,
-                        8
-                    ],
+                    "min_samples_leaf": [1,2,4,8],
 
-                    "criterion": [
-                        "gini",
-                        "entropy"
-                    ]
+                    "criterion": ["gini","entropy"]
                 }
             },
 
             "RandomForestClassifier": {
 
-                "model": RandomForestClassifier(
-                    random_state=42
-                ),
+                "model": RandomForestClassifier(random_state=42),
 
                 "params": {
 
-                    "n_estimators": [
-                        100,
-                        200,
-                        300,
-                        500
-                    ],
+                    "n_estimators": [100,200,300,500],
 
-                    "max_depth": [
-                        5,
-                        10,
-                        20,
-                        None
-                    ],
+                    "max_depth": [5,10,20,None],
 
-                    "min_samples_split": [
-                        2,
-                        5,
-                        10
-                    ],
+                    "min_samples_split": [2,5,10],
 
-                    "min_samples_leaf": [
-                        1,
-                        2,
-                        4
-                    ],
+                    "min_samples_leaf": [1,2,4],
 
-                    "criterion": [
-                        "gini",
-                        "entropy"
-                    ]
+                    "criterion": ["gini","entropy"]
                 }
             },
 
@@ -252,16 +175,9 @@ class ModelFactory:
                         100
                     ],
 
-                    "kernel": [
-                        "linear",
-                        "rbf",
-                        "poly"
-                    ],
+                    "kernel": ["linear","rbf","poly"],
 
-                    "gamma": [
-                        "scale",
-                        "auto"
-                    ]
+                    "gamma": ["scale","auto"]
                 }
             },
 
@@ -271,25 +187,11 @@ class ModelFactory:
 
                 "params": {
 
-                    "n_neighbors": [
-                        3,
-                        5,
-                        7,
-                        9,
-                        11,
-                        15
-                    ],
+                    "n_neighbors": [3,5,7,9,11,15],
 
-                    "weights": [
-                        "uniform",
-                        "distance"
-                    ],
+                    "weights": ["uniform","distance"],
 
-                    "metric": [
-                        "euclidean",
-                        "manhattan",
-                        "minkowski"
-                    ]
+                    "metric": ["euclidean","manhattan","minkowski"]
                 }
             }
         }
